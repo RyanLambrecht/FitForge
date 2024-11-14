@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from django.contrib.auth.models import User
+
 FITNESS_LEVELS = (
     (1, "Beginner"),
     (2, "Intermediate"),
@@ -26,3 +28,18 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name}"
+
+# checkin model
+class DailyCheckIn(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    workout_completed = models.TextField(blank=True, null=True)
+    meals = models.TextField(blank=True, null=True)
+    progress_notes = models.TextField(blank=True, null=True)
+
+    class Meta:
+        # one per day
+        unique_together = ('user', 'date')  
+
+    def __str__(self):
+        return f"{self.user.username} - {self.date}"

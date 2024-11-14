@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from .models import CustomUser
+from .models import DailyCheckIn
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -31,3 +32,11 @@ class CustomUserChangeForm(UserChangeForm):
             "fitness_level",
             "gender",
         )
+
+
+# form for checkin
+class DailyCheckInForm(forms.ModelForm):
+    class Meta:
+        model = DailyCheckIn
+        fields = ['workout_completed', 'meals', 'progress_notes']
+

@@ -1,0 +1,16 @@
+
+
+<h2>Progress Report</h2>
+<ul>
+    {% for checkin in checkins %}
+        <li>
+            <strong>{{ checkin.date }}</strong>: 
+            Workout - {{ checkin.workout_completed }},
+            Meals - {{ checkin.meals }},
+            Notes - {{ checkin.progress_notes }}
+        </li>
+    {% endfor %}
+</ul>
+
+
+<p><a href="{% url 'home' %}">Back to Homepage</a></p>
