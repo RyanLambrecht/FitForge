@@ -9,6 +9,7 @@
     {% csrf_token %}
     <button type="submit">Log Out</button>
 </form>
+<a href="{% url 'edit_account' user.pk %}">Edit Account Details</a>
 {% else %}
 <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}

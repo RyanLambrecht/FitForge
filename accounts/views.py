@@ -1,14 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.shortcuts import render
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.shortcuts import render, redirect
-from .models import DailyCheckIn
+from .models import DailyCheckIn, CustomUser
 from .forms import DailyCheckInForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
+from django.views.generic import FormView
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 # Signup view
@@ -32,6 +35,23 @@ def signup_view(request):
     )  # Ensure this matches the path
 
 
+@login_required
+def edit_account_view(request, pk):
+    user = CustomUser.objects.get(pk=pk)
+
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+    else:
+        form = CustomUserChangeForm(instance=user)
+
+    return render(
+        request, "registration/edit_account.html", {"form": form, "user": user}
+    )
+
+
 # Login view
 def login_view(request):
     if request.method == "POST":
@@ -46,13 +66,6 @@ def login_view(request):
     return render(request, "accounts/login.html", {"form": form})
 
 
-# Logout view
-def logout_view(request):
-    logout(request)
-    messages.success(request, "Logged out successfully")
-    return redirect("home")
-
-
 def home_view(request):
     return render(request, "pages/home.html")
 
@@ -62,18 +75,22 @@ def home_view(request):
 def daily_checkin_view(request):
     today = timezone.now().date()
     checkin, created = DailyCheckIn.objects.get_or_create(user=request.user, date=today)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = DailyCheckInForm(request.POST, instance=checkin)
         if form.is_valid():
             form.save()
-            return redirect('progress_report')  # Redirect to progress report or dashboard
+            return redirect(
+                "progress_report"
+            )  # Redirect to progress report or dashboard
     else:
         form = DailyCheckInForm(instance=checkin)
-    
-    return render(request, 'checkins/daily_checkin.html', {'form': form, 'today': today})
+
+    return render(
+        request, "checkins/daily_checkin.html", {"form": form, "today": today}
+    )
+
 
 @login_required
 def progress_report_view(request):
-    checkins = DailyCheckIn.objects.filter(user=request.user).order_by('-date')
-    return render(request, 'checkins/progress_report.html', {'checkins': checkins})
-
+    checkins = DailyCheckIn.objects.filter(user=request.user).order_by("-date")
+    return render(request, "checkins/progress_report.html", {"checkins": checkins})
