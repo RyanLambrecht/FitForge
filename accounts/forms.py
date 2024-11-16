@@ -23,10 +23,6 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = (
-            "username",
-            "first_name",
-            "last_name",
-            "email",
             "age",
             "weight",
             "fitness_level",
@@ -38,5 +34,4 @@ class CustomUserChangeForm(UserChangeForm):
 class DailyCheckInForm(forms.ModelForm):
     class Meta:
         model = DailyCheckIn
-        fields = ['workout_completed', 'meals', 'progress_notes']
-
+        fields = ["workout_completed", "meals", "progress_notes"]
