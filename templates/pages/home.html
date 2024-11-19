@@ -1,6 +1,5 @@
 <h1>Fit Forge homepage</h1>
 
-
 {% if user.is_authenticated %}
 <a href="{% url 'daily_checkin' %}">Daily Check-in</a>
 <a href="{% url 'progress_report' %}">View Progress Report</a>
@@ -13,3 +12,4 @@
 {% else %}
 <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
+<body></body>
