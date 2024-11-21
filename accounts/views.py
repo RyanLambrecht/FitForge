@@ -14,12 +14,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
-# Signup view
-from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from django.contrib import messages
-
-
 def signup_view(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -27,12 +21,10 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Signup successful")
-            return redirect("home")  # Adjust this if your home URL is named differently
+            return redirect("home")
     else:
         form = CustomUserCreationForm()
-    return render(
-        request, "accounts/signup.html", {"form": form}
-    )  # Ensure this matches the path
+    return render(request, "accounts/signup.html", {"form": form})
 
 
 @login_required
