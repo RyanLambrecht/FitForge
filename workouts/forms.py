@@ -33,7 +33,6 @@ class AddLift(forms.ModelForm):
     class Meta:
         model = LiftingWorkout
         fields = [
-            "name",
             "date",
             "exercise",
             "weight",
