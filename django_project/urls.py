@@ -24,10 +24,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls")),  # Include accounts URLs
     path("accounts/", include("django.contrib.auth.urls")),
+    path("workouts/", include("workouts.urls")),
     path("", include("pages.urls")),  # Assuming 'pages' has the main views
-    
-] 
+]
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns += path("__debug__/", include(debug_toolbar.urls)),
+
+    urlpatterns += (path("__debug__/", include(debug_toolbar.urls)),)

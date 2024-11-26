@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-=txn^^bj$9a=&h&+1%qt5pfbk!7)7=t934lly3&d=2z&!rb+5r"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True    
+DEBUG = True
 
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts",
     "debug_toolbar",
+    "workouts",
 ]
 
 MIDDLEWARE = [
@@ -120,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"] 
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -133,10 +134,9 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 
-
-INTERNAL_IPS = ['127.0.0.1', 'localhost']
+INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
 
 DEBUG_TOOLBAR_CONFIG = {
-    'INSERT_BEFORE': '</body>',
+    "INSERT_BEFORE": "</body>",
 }
