@@ -20,13 +20,12 @@ def user_is_creator(model_class, object_id_field, user_field_name="user"):
     def decorator(view_func):
         @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):
-            # Get the object ID from the URL parameters (kwargs)
+
             object_id = kwargs.get(object_id_field)
 
-            # Retrieve the object or raise 404 if not found
             obj = get_object_or_404(model_class, pk=object_id)
 
-            # Check if the logged-in user is the creator
+
             if getattr(obj, user_field_name) != request.user:
                 raise Http404("You do not have permission to access this object.")
 
