@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from .models import LiftingWorkout, CardioWorkout
-from .forms import AddLift, EditLift, AddCardio, EditCardio, TargetSearch, BodyPartSearch
+from .forms import AddLift, EditLift, AddCardio, EditCardio, TargetSearch, BodyPartSearch, EquipmentSearch
 from django.views.generic import CreateView, FormView, TemplateView
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -143,5 +143,30 @@ def search_body_part_view(request):
 
     else:
         form = BodyPartSearch()
+
+    return render(request, 'searches/search.html', {'form': form})
+
+def search_equipment_view(request):
+    if request.method == 'GET':
+        form = EquipmentSearch(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['search_choice']
+
+            url = f"https://exercisedb.p.rapidapi.com/exercises/equipment/{query}"
+
+            querystring = {"limit":"10","offset":"0"}
+
+            headers = {
+	        "x-rapidapi-key": "02545e6abemsh0d4efd23e797fdfp174875jsn9e006e53804a",
+	        "x-rapidapi-host": "exercisedb.p.rapidapi.com",
+            }
+
+            response = requests.get(url, headers=headers, params=querystring)
+            data = response.json()
+
+            return render(request, 'searches/results.html', {'data': data})
+
+    else:
+        form = EquipmentSearch()
 
     return render(request, 'searches/search.html', {'form': form})

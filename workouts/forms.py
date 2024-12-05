@@ -92,3 +92,38 @@ class BodyPartSearch(forms.Form):
     ]
 
     search_choice = forms.ChoiceField(choices=BODY_PART_OPTIONS)
+
+
+class EquipmentSearch(forms.Form):
+    EQUIPMENT_OPTIONS = [
+        ('assisted', 'Assisted'),
+        ('band', 'Band'),
+        ('barbell', 'Barbell'),
+        ('body weight', 'Body Weight'),
+        ('bosu ball', 'Bosu Ball'),
+        ('cable', 'Cable'),
+        ('dumbbell', 'Dumbbell'),
+        ('elliptical machine', 'Elliptical'),
+        ('ez barbell', 'EZ Curl Barbell'),
+        ('hammer', 'Hammer'),
+        ('kettlebell', 'Kettlebell'),
+        ('leverage machine', 'Leverage Machine'),
+        ('medicine ball', 'Medicine Ball'),
+        ('olympic barbell', 'Olympic Barbell'),
+        ('resistance band', 'Resistance Band'),
+        ('roller', 'Roller'),
+        ('rope', 'Rope'),
+        ('skierg machine', 'Skierg Machine'),
+        ('sled machine', 'Sled Machine'),
+        ('smith machine', 'Smith Machine'),
+        ('stability ball', 'Stability Ball'),
+        ('stationary bike', 'Stationary Bike'),
+        ('stepmill machine', 'Stepmill Machine'),
+        ('tire', 'Tire'),
+        ('trap bar', 'Trap Bar'),
+        ('upper body ergometer', 'Upper Body Ergometer'),
+        ('weighted', 'Weighted'),
+        ('wheel roller', 'Wheel Roller'),
+    ]
+
+    search_choice = forms.ChoiceField(choices=EQUIPMENT_OPTIONS)

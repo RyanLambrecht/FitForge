@@ -2,6 +2,7 @@ from django.test import TestCase
 from .models import LiftingWorkout, CardioWorkout
 from django.contrib.auth import get_user_model
 import datetime
+import requests
 
 
 class WorkoutTest(TestCase):
@@ -54,3 +55,19 @@ class WorkoutTest(TestCase):
         self.assertEqual(self.cardio.end_time, datetime.time(11, 52, 50))
         self.assertEqual(self.cardio.distance, 2.4)
         self.assertEqual(self.cardio.notes, "ow")
+
+class APITest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.query = {"limit":"10","offset":"0"}
+        cls.headers = {
+	        "x-rapidapi-key": "02545e6abemsh0d4efd23e797fdfp174875jsn9e006e53804a",
+	        "x-rapidapi-host": "exercisedb.p.rapidapi.com"
+        }
+    
+    def test_connection(self):
+        url = "https://exercisedb.p.rapidapi.com/status"
+
+        response = requests.get(url, headers=self.headers)
+
+        self.assertEqual(response.json(), {'status': 'online'})
