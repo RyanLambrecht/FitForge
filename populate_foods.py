@@ -1,14 +1,14 @@
 import csv
-from nutrition.models import Food  # Replace 'nutrition' with your app name
+from nutrition.models import Food  
 
-# Path to the CSV file
+
 file_path = "foods.csv"
 
 def populate_foods():
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            # Create Food objects in the database
+    
             Food.objects.create(
                 name=row['name'],
                 calories=row['calories'],
