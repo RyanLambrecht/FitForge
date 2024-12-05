@@ -76,3 +76,19 @@ class TargetSearch(forms.Form):
     ]
 
     search_choice = forms.ChoiceField(choices=MUSCLE_OPTIONS)
+
+class BodyPartSearch(forms.Form):
+    BODY_PART_OPTIONS = [
+        ('upper arms', 'Arms (Upper)'),
+        ('lower arms', 'Arms (Lower)'),
+        ('back', 'Back'),
+        ('cardio', 'Cardio'),
+        ('chest', 'Chest'),
+        ('upper legs', 'Legs (Upper)'),
+        ('lower legs', 'Legs (Lower)'),
+        ('neck', 'Neck'),
+        ('shoulders', 'Shoulders'),
+        ('waist', 'Waist'),
+    ]
+
+    search_choice = forms.ChoiceField(choices=BODY_PART_OPTIONS)
