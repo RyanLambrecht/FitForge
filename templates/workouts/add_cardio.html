@@ -1,6 +1,8 @@
+{% load crispy_forms_tags %}
+
 <h2>Add New Run</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy }}
     <button type="submit">Save Run</button>
 </form>

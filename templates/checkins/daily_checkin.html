@@ -1,8 +1,8 @@
+{% load crispy_forms_tags %}
 
 <h2>Daily Check-in for {{ today }}</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <button type="submit">Save Check-in</button>
 </form>
-
