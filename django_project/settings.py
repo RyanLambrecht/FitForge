@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "accounts",
     "debug_toolbar",
     "workouts",
+    "nutrition",
 ]
 
 MIDDLEWARE = [
