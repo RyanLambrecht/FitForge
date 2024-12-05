@@ -1,0 +1,24 @@
+{% for entry in data %}
+<div>
+    <h2>Workout Name: {{ entry.name }}</h2>
+
+    <h3>Area of Body: </h3>
+    <p>{{ entry.bodyPart }}</p>
+
+    <h3>Primary Muscles: </h3>
+    <p>{{ entry.target }}</p>
+
+    <h3>Secondary Muscles: </h3>
+    {% for second in entry.secondaryMuscles %}
+    <p>{{ second }}</p>
+    {% endfor %}
+
+    <h3>Necessary Equipment: </h3>
+    <p>{{ entry.equipment }}</p>
+
+    <h3>Instructions: </h3>
+    <p>{% for step in entry.instructions %}</p>
+    <p>{{ step }}</p>
+    {% endfor %}
+</div>
+{% endfor %}

@@ -53,3 +53,26 @@ class EditLift(forms.ModelForm):
             "sets",
             "notes",
         ]
+
+class TargetSearch(forms.Form):
+    MUSCLE_OPTIONS = [
+        ('abs', 'Abs'),
+        ('biceps', 'Biceps'),
+        ('calves', 'Calves'),
+        ('cardiovascular system', 'Cardiovascular'),
+        ('delts', 'Delts'),
+        ('forearms', 'Forearms'),
+        ('glutes', 'Glutes'),
+        ('hamstrings', 'Hamstrings'),
+        ('lats', 'Lats'),
+        ('levator scapulae', 'Levator Scapulae'),
+        ('pectorals', 'Pectorals'),
+        ('quads', 'Quads'),
+        ('serratus anterior', 'Serratus Anterior'),
+        ('spine', 'Spine'),
+        ('traps', 'Traps'),
+        ('triceps', 'Triceps'),
+        ('upper back', 'Upper Back'),
+    ]
+
+    search_choice = forms.ChoiceField(choices=MUSCLE_OPTIONS)
