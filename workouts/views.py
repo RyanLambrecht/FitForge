@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404
 from functools import wraps
 import requests
+import os
 
 
 def user_is_creator(model_class, object_id_field, user_field_name="user"):
@@ -107,8 +108,8 @@ def search_target_view(request):
             querystring = {"limit":"10","offset":"0"}
 
             headers = {
-	        "x-rapidapi-key": "02545e6abemsh0d4efd23e797fdfp174875jsn9e006e53804a",
-	        "x-rapidapi-host": "exercisedb.p.rapidapi.com",
+	        "x-rapidapi-key": os.getenv('RAPIDAPI_KEY'),
+            "x-rapidapi-host": os.getenv('RAPIDAPI_HOST'),
             }
 
             response = requests.get(url, headers=headers, params=querystring)
@@ -132,8 +133,8 @@ def search_body_part_view(request):
             querystring = {"limit":"10","offset":"0"}
 
             headers = {
-	        "x-rapidapi-key": "02545e6abemsh0d4efd23e797fdfp174875jsn9e006e53804a",
-	        "x-rapidapi-host": "exercisedb.p.rapidapi.com",
+	        "x-rapidapi-key": os.getenv('RAPIDAPI_KEY'),
+            "x-rapidapi-host": os.getenv('RAPIDAPI_HOST'),
             }
 
             response = requests.get(url, headers=headers, params=querystring)
@@ -157,8 +158,8 @@ def search_equipment_view(request):
             querystring = {"limit":"10","offset":"0"}
 
             headers = {
-	        "x-rapidapi-key": "02545e6abemsh0d4efd23e797fdfp174875jsn9e006e53804a",
-	        "x-rapidapi-host": "exercisedb.p.rapidapi.com",
+	        "x-rapidapi-key": os.getenv('RAPIDAPI_KEY'),
+            "x-rapidapi-host": os.getenv('RAPIDAPI_HOST'),
             }
 
             response = requests.get(url, headers=headers, params=querystring)

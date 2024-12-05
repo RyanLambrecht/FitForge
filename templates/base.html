@@ -85,9 +85,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
                         <a class="collapse-item" href={% url "add_cardio" %}>Add Cardio</a>
-                        {% comment %} <a class="collapse-item" href={% url "edit_cardio" pk=%}>Edit Cardio</a> {% endcomment %}
+                        <a class="collapse-item" href={% url "edit_cardio" user.pk%}>Edit Cardio</a>
                         <a class="collapse-item" href={% url "add_lift" %}>Add Lifts</a>
-                        {% comment %} <a class="collapse-item" href={% url "edit_lift" pk=1%}>Edit Lifts</a> {% endcomment %}
+                        <a class="collapse-item" href={% url "edit_lift" user.pk%}>Edit Lifts</a>
                     </div>
                 </div>
             </li>
