@@ -22,10 +22,11 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("accounts/", include("accounts.urls")),  # Include accounts URLs
+    path("accounts/", include("accounts.urls")),  
     path("accounts/", include("django.contrib.auth.urls")),
     path("workouts/", include("workouts.urls")),
-    path("", include("pages.urls")),  # Assuming 'pages' has the main views
+    path("", include("pages.urls")),  
+    path('nutrition/', include('nutrition.urls')),
 ]
 
 if settings.DEBUG:

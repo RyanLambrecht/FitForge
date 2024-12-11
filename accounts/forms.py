@@ -35,3 +35,4 @@ class DailyCheckInForm(forms.ModelForm):
     class Meta:
         model = DailyCheckIn
         fields = ["workout_completed", "meals", "progress_notes"]
+

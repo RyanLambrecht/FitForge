@@ -23,6 +23,7 @@ class CustomUser(AbstractUser):
     gender = models.IntegerField(choices=GENDERS)
     groups = models.ManyToManyField(blank=True, to="auth.group")
     user_permissions = models.ManyToManyField(blank=True, to="auth.permission")
+    caloric_intake = models.PositiveIntegerField(null=True, blank=True)  # cals
 
     REQUIRED_FIELDS = ["first_name", "last_name", "age", "fitness_level", "gender"]
 
