@@ -8,5 +8,5 @@ urlpatterns = [
     path("cardio/edit/<int:pk>/", edit_cardio_view, name="edit_cardio"),
     path("search/targets/", search_target_view, name="search_target"),
     path("search/body_part/", search_body_part_view, name="search_body_part"),
-    path("search/equipment/", search_equipment_view, name="search_equipment")
+    path("search/equipment/", search_equipment_view, name="search_equipment"),
 ]

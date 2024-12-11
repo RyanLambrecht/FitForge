@@ -24,7 +24,7 @@ def signup_view(request):
             return redirect("home")
     else:
         form = CustomUserCreationForm()
-    return render(request, "accounts/signup.html", {"form": form})
+    return render(request, "registration/signup.html", {"form": form})
 
 
 @login_required
@@ -55,7 +55,7 @@ def login_view(request):
             return redirect("home")  # Redirect to home page after login
     else:
         form = AuthenticationForm()
-    return render(request, "accounts/login.html", {"form": form})
+    return render(request, "registration/login.html", {"form": form})
 
 
 def home_view(request):
