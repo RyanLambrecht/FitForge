@@ -11,38 +11,23 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-# import os
-from environs import Env
-env = Env()
-env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Make sure you've initialized the `env` object!
-FORCE_SCRIPT_NAME = (
-	'/' + env.str('SITE_NAME', default=None)  # if the SITE_NAME env variable is set
-	if not env.str('SITE_NAME', default=None) # if not
-	else ''  # set to nothing to let Django take over
-)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "default='django-insecure-4$6@5&r4%kex2%me935-8q^=ep=ufnyv89&i7@dx^68924o2q#"
+SECRET_KEY = "django-insecure-=txn^^bj$9a=&h&+1%qt5pfbk!7)7=t934lly3&d=2z&!rb+5r"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool(
-	'DEBUG',
-	default=False  # or True, to fail unsafely
-)
+DEBUG = True
 
-ALLOWED_HOSTS = [
-	'localhost',
-	'127.0.0.1',
-	'csci258.cs.umt.edu',  # this is the url of the VM
-]
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
 
 # Application definition
 
@@ -61,7 +46,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -96,33 +80,11 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-	# PostgreSQL database used in production
-	'prod': {
-		'ENGINE': 'django.db.backends.postgresql',
-		'NAME': env.str('POSTGRES_DB', default=None),
-		'USER': env.str('POSTGRES_USER', default=None),
-		'PASSWORD': env.str('POSTGRES_PASSWORD', default=None),
-		'HOST': 'postgres',
-		'PORT': '5432',
-	},
-
-	# local SQLite database used for development and testing
-	'local': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': BASE_DIR / 'db.sqlite3',
-	}
-
-	# any other configs would go down here
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
-
-
-# defaults to local if not set in environment variable
-# environment variable is set by the Docker config
-default_database = env.str('DJANGO_DATABASE', default='local')
-# sets detected database to default
-DATABASES['default'] = DATABASES[default_database]
-
-
 
 
 # Password validation
@@ -159,15 +121,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# URL path to serve static files from; ex: '/group1/static/'
-STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
-# project static files location
-STATICFILES_DIRS = [ BASE_DIR / "static" ]
-# collected static files location; includes other apps, like admin
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-# enable caching and compression when serving static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -180,11 +135,7 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 
-
-INTERNAL_IPS = [
-	'127.0.0.1',
-	'localhost',
-]
+INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
 
 DEBUG_TOOLBAR_CONFIG = {
