@@ -1,9 +1,49 @@
 from django.contrib import admin
-
-# Register your models here.
-from django.contrib import admin
 from .models import Food
+from .forms import FoodIntakeForm
 
-@admin.register(Food)
+
 class FoodAdmin(admin.ModelAdmin):
-    list_display = ('name', 'calories', 'protein', 'carbs', 'fats', 'serving_size')
+    add_form = FoodIntakeForm
+    list_display = [
+        "name",
+        "date",
+        "calories",
+        "protein",
+        "carbs",
+        "fats",
+    ]
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "name",
+                    "date",
+                    "calories",
+                    "protein",
+                    "carbs",
+                    "fats",
+                )
+            },
+        ),
+    )
+    add_fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "name",
+                    "date",
+                    "calories",
+                    "protein",
+                    "carbs",
+                    "fats",
+                )
+            },
+        ),
+    )
+
+
+admin.site.register(Food, FoodAdmin)

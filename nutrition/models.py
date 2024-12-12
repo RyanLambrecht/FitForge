@@ -1,16 +1,17 @@
 from django.db import models
+from django.conf import settings
 
-
-
-from django.db import models
 
 class Food(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    date = models.DateField(null="2024-01-01")
     calories = models.DecimalField(max_digits=6, decimal_places=2)
     protein = models.DecimalField(max_digits=6, decimal_places=2)
     carbs = models.DecimalField(max_digits=6, decimal_places=2)
     fats = models.DecimalField(max_digits=6, decimal_places=2)
-    serving_size = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.name.username

@@ -13,6 +13,8 @@ class CustomUserCreationForm(UserCreationForm):
             "last_name",
             "email",
             "age",
+            "height_ft",
+            "height_in",
             "weight",
             "fitness_level",
             "gender",
@@ -24,6 +26,8 @@ class CustomUserChangeForm(UserChangeForm):
         model = CustomUser
         fields = (
             "age",
+            "height_ft",
+            "height_in",
             "weight",
             "fitness_level",
             "gender",
@@ -35,4 +39,3 @@ class DailyCheckInForm(forms.ModelForm):
     class Meta:
         model = DailyCheckIn
         fields = ["workout_completed", "meals", "progress_notes"]
-

@@ -15,6 +15,8 @@ class CustomUserAdmin(UserAdmin):
         "last_name",
         "email",
         "age",
+        "height_ft",
+        "height_in",
         "weight",
         "gender",
         "fitness_level",
@@ -26,6 +28,8 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "age",
+                    "height_ft",
+                    "height_in",
                     "weight",
                     "gender",
                     "fitness_level",
@@ -39,6 +43,8 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "age",
+                    "height_ft",
+                    "height_in",
                     "weight",
                     "gender",
                     "fitness_level",

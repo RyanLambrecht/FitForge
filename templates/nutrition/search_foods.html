@@ -1,0 +1,11 @@
+{% load crispy_forms_tags %}
+
+<h1>Search Foods for Nutritional Information</h1>
+
+<p>Enter an ingredient list list for what you are cooking, like "1 cup rice, 10 oz chickpeas", etc.</p>
+<p>Enter each ingredient on a new line.</p>
+
+<form method="GET">{% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit">Search</button>
+</form>

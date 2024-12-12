@@ -10,8 +10,8 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import DailyCheckIn, CustomUser
 from .forms import DailyCheckInForm
-from nutrition.forms import CaloricIntakeForm 
-from nutrition.models import Food 
+from nutrition.forms import CaloricIntakeForm
+from nutrition.models import Food
 
 
 # Signup view
@@ -25,7 +25,7 @@ def signup_view(request):
             return redirect("home")
     else:
         form = CustomUserCreationForm()
-    return render(request, "accounts/signup.html", {"form": form})
+    return render(request, "registration/signup.html", {"form": form})
 
 
 # Edit account view
@@ -54,10 +54,10 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, "Login successful")
-            return redirect("home")  
+            return redirect("home")
     else:
         form = AuthenticationForm()
-    return render(request, "accounts/login.html", {"form": form})
+    return render(request, "registration/login.html", {"form": form})
 
 
 # Home view
@@ -117,7 +117,9 @@ def meal_suggestions_view(request):
     foods = Food.objects.all()
     suggestions = generate_meal_plan(foods, caloric_intake)
 
-    return render(request, "nutrition/meal_suggestions.html", {"suggestions": suggestions})
+    return render(
+        request, "nutrition/meal_suggestions.html", {"suggestions": suggestions}
+    )
 
 
 # generate a meal plan
