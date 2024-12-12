@@ -1,7 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from .models import LiftingWorkout, CardioWorkout
-from .forms import AddLift, EditLift, AddCardio, EditCardio, TargetSearch, BodyPartSearch, EquipmentSearch
+from .forms import (
+    AddLift,
+    EditLift,
+    AddCardio,
+    EditCardio,
+    TargetSearch,
+    BodyPartSearch,
+    EquipmentSearch,
+)
 from django.views.generic import CreateView, FormView, TemplateView
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -26,7 +34,6 @@ def user_is_creator(model_class, object_id_field, user_field_name="user"):
             object_id = kwargs.get(object_id_field)
 
             obj = get_object_or_404(model_class, pk=object_id)
-
 
             if getattr(obj, user_field_name) != request.user:
                 raise Http404("You do not have permission to access this object.")
@@ -97,77 +104,80 @@ def edit_cardio_view(request, pk):
         request, "workouts/edit_cardio.html", {"form": form, "workout": workout}
     )
 
+
 def search_target_view(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         form = TargetSearch(request.GET)
         if form.is_valid():
-            query = form.cleaned_data['search_choice']
+            query = form.cleaned_data["search_choice"]
 
             url = f"https://exercisedb.p.rapidapi.com/exercises/target/{query}"
 
-            querystring = {"limit":"10","offset":"0"}
+            querystring = {"limit": "10", "offset": "0"}
 
             headers = {
-	        "x-rapidapi-key": os.getenv('RAPIDAPI_KEY'),
-            "x-rapidapi-host": os.getenv('RAPIDAPI_HOST'),
+                "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
+                "x-rapidapi-host": os.getenv("RAPIDAPI_HOST_WORKOUTS"),
             }
 
             response = requests.get(url, headers=headers, params=querystring)
             data = response.json()
 
-            return render(request, 'searches/results.html', {'data': data})
+            return render(request, "searches/results.html", {"data": data})
 
     else:
         form = TargetSearch()
 
-    return render(request, 'searches/search.html', {'form': form})
+    return render(request, "searches/search.html", {"form": form})
+
 
 def search_body_part_view(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         form = BodyPartSearch(request.GET)
         if form.is_valid():
-            query = form.cleaned_data['search_choice']
+            query = form.cleaned_data["search_choice"]
 
             url = f"https://exercisedb.p.rapidapi.com/exercises/bodyPart/{query}"
 
-            querystring = {"limit":"10","offset":"0"}
+            querystring = {"limit": "10", "offset": "0"}
 
             headers = {
-	        "x-rapidapi-key": os.getenv('RAPIDAPI_KEY'),
-            "x-rapidapi-host": os.getenv('RAPIDAPI_HOST'),
+                "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
+                "x-rapidapi-host": os.getenv("RAPIDAPI_HOST_WORKOUTS"),
             }
 
             response = requests.get(url, headers=headers, params=querystring)
             data = response.json()
 
-            return render(request, 'searches/results.html', {'data': data})
+            return render(request, "searches/results.html", {"data": data})
 
     else:
         form = BodyPartSearch()
 
-    return render(request, 'searches/search.html', {'form': form})
+    return render(request, "searches/search.html", {"form": form})
+
 
 def search_equipment_view(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         form = EquipmentSearch(request.GET)
         if form.is_valid():
-            query = form.cleaned_data['search_choice']
+            query = form.cleaned_data["search_choice"]
 
             url = f"https://exercisedb.p.rapidapi.com/exercises/equipment/{query}"
 
-            querystring = {"limit":"10","offset":"0"}
+            querystring = {"limit": "10", "offset": "0"}
 
             headers = {
-	        "x-rapidapi-key": os.getenv('RAPIDAPI_KEY'),
-            "x-rapidapi-host": os.getenv('RAPIDAPI_HOST'),
+                "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
+                "x-rapidapi-host": os.getenv("RAPIDAPI_HOST_WORKOUTS"),
             }
 
             response = requests.get(url, headers=headers, params=querystring)
             data = response.json()
 
-            return render(request, 'searches/results.html', {'data': data})
+            return render(request, "searches/results.html", {"data": data})
 
     else:
         form = EquipmentSearch()
 
-    return render(request, 'searches/search.html', {'form': form})
+    return render(request, "searches/search.html", {"form": form})

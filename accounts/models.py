@@ -2,14 +2,15 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 FITNESS_LEVELS = (
-    (1, "Beginner"),
-    (2, "Intermediate"),
-    (3, "Advanced"),
+    ("Inactive", "Inactive"),
+    ("Low Active", "Low Active"),
+    ("Active", "Active"),
+    ("Very Active", "Very Active"),
 )
 
 GENDERS = (
-    (1, "Male"),
-    (2, "Female"),
+    ("male", "Male"),
+    ("female", "Female"),
 )
 
 
@@ -19,12 +20,23 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=40, null="", blank=False)
     age = models.PositiveIntegerField(null=True, blank=True)
     weight = models.PositiveIntegerField(null=True, blank=True)
-    fitness_level = models.IntegerField(choices=FITNESS_LEVELS)
-    gender = models.IntegerField(choices=GENDERS)
+    height_FT = models.PositiveIntegerField(null=True, blank=True)
+    height_IN = models.PositiveIntegerField(null=True, blank=True)
+    fitness_level = models.CharField(max_length=11, choices=FITNESS_LEVELS)
+    gender = models.CharField(max_length=6, choices=GENDERS)
     groups = models.ManyToManyField(blank=True, to="auth.group")
     user_permissions = models.ManyToManyField(blank=True, to="auth.permission")
+    caloric_intake = models.PositiveIntegerField(null=True, blank=True)  # cals
 
-    REQUIRED_FIELDS = ["first_name", "last_name", "age", "fitness_level", "gender"]
+    REQUIRED_FIELDS = [
+        "first_name",
+        "last_name",
+        "age",
+        "height_FT",
+        "height_IN",
+        "fitness_level",
+        "gender",
+    ]
 
     def __str__(self):
         return f"{self.first_name}"

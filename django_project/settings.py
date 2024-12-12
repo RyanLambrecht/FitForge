@@ -15,8 +15,10 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 load_dotenv()
-RAPIDAPI_KEY = os.getenv('RAPIDAPI_KEY')
-RAPIDAPI_HOST = os.getenv('RAPIDAPI_HOST')
+RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
+RAPIDAPI_HOST_WORKOUTS = os.getenv("RAPIDAPI_HOST_WORKOUTS")
+RAPIDAPI_HOST_MACROS = os.getenv("RAPIDAPI_HOST_MACROS")
+RAPIDAPI_HOST_NUTRITIONDATA = os.getenv("RAPIDAPI_HOST_NUTRITIONDATA")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     "accounts",
     "debug_toolbar",
     "workouts",
+    "nutrition",
 ]
 
 MIDDLEWARE = [

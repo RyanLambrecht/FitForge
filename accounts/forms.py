@@ -13,6 +13,8 @@ class CustomUserCreationForm(UserCreationForm):
             "last_name",
             "email",
             "age",
+            "height_FT",
+            "height_IN",
             "weight",
             "fitness_level",
             "gender",
@@ -24,6 +26,8 @@ class CustomUserChangeForm(UserChangeForm):
         model = CustomUser
         fields = (
             "age",
+            "height_FT",
+            "height_IN",
             "weight",
             "fitness_level",
             "gender",

@@ -1,0 +1,67 @@
+<!-- nutrition.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Data</title>
+</head>
+
+<body>
+    <h1>Nutrition Information</h1>
+
+    <!-- BMI and Caloric Needs -->
+    <h2>BMI and Estimated Daily Caloric Needs</h2>
+    <p>Height: {{ user.height_FT }} Foot {{ user.height_IN }} Inches</p>
+    <p>Weight: {{ user.weight }} Pounds</p>
+    <p>Age: {{ user.age }} Years Old</p>
+    <p>BMI: {{ bmi }}</p>
+    <p>Estimated Daily Caloric Needs: {{ caloric_needs }}</p>
+
+    <!-- Macronutrients Table -->
+    <h2>Macronutrients</h2>
+    <table border="1">
+        {% for row in macronutrients %}
+        <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Essential Minerals Table -->
+    <h2>Essential Minerals</h2>
+    <table border="1">
+        {% for row in minerals %}
+        <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+            <td>{{ row.2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Non-Essential Minerals Table -->
+    <h2>Non-Essential Minerals</h2>
+    <table border="1">
+        {% for row in non_essential_minerals %}
+        <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+            <td>{{ row.2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Vitamins Table -->
+    <h2>Vitamins</h2>
+    <table border="1">
+        {% for row in vitamins %}
+        <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+            <td>{{ row.2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
