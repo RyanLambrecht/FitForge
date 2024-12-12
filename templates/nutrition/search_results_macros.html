@@ -1,6 +1,38 @@
-<h1>Macro Search Results</h1>
+<h1>Nutrition Information Search Results</h1>
 
-<p>Calories: {{ data.calories }}</p>
-<p>{{ data.totalNutrients.FAT.label }}: {{ data.totalNutrients.FAT.quantity }} grams</p>
-<p>{{ data.totalNutrients.CHOCDF.label }}: {{ data.totalNutrients.CHOCDF.quantity }} grams</p>
-<p>{{ data.totalNutrients.PROCNT.label }}: {{ data.totalNutrients.PROCNT.quantity }} grams</p>
+<!-- Display Calories -->
+<h2>Calories</h2>
+<p>{{ calories }} kcal</p>
+
+<!-- Display Diet Labels -->
+<h2>Diet Labels</h2>
+<ul>
+    {% for label in diet_labels %}
+    <li>{{ label }}</li>
+    {% endfor %}
+</ul>
+
+<!-- Display Health Labels -->
+<h2>Health Labels</h2>
+<ul>
+    {% for label in health_labels %}
+    <li>{{ label }}</li>
+    {% endfor %}
+</ul>
+
+<!-- Nutrients Table -->
+<h2>Nutritional Information</h2>
+<table border="1">
+    <tr>
+        <th>Nutrient</th>
+        <th>Quantity</th>
+        <th>Unit</th>
+    </tr>
+    {% for nutrient, data in total_nutrients.items %}
+    <tr>
+        <td>{{ data.label }}</td>
+        <td>{{ data.quantity }}</td>
+        <td>{{ data.unit }}</td>
+    </tr>
+    {% endfor %}
+</table>

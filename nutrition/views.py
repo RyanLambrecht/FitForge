@@ -94,6 +94,7 @@ class DailyIntakeView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 
+@login_required
 def search_nutrients(request):
     if request.method == "GET":
         form = FoodIntakeForm(request.GET)
@@ -115,9 +116,19 @@ def search_nutrients(request):
             response = requests.get(url, headers=headers, params=querystring)
             data = response.json()
 
-            return render(
-                request, "nutrition/search_results_macros.html", {"data": data}
-            )
+            calories = data["calories"]
+            diet_labels = data["dietLabels"]
+            health_labels = data["healthLabels"]
+            total_nutrients = data["totalNutrients"]
+
+            context = {
+                "calories": calories,
+                "diet_labels": diet_labels,
+                "health_labels": health_labels,
+                "total_nutrients": total_nutrients,
+            }
+
+            return render(request, "nutrition/search_results_macros.html", context)
 
     else:
         form = FoodIntakeForm()
