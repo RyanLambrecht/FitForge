@@ -87,9 +87,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
                         <a class="collapse-item" href={% url "add_cardio" %}>Add Cardio</a>
-                        <a class="collapse-item" href={% url "edit_cardio" user.pk%}>Edit Cardio</a>
+                        {% comment %} <a class="collapse-item" href={% url "edit_cardio" user.pk%}>Edit Cardio</a> {% endcomment %}
                         <a class="collapse-item" href={% url "add_lift" %}>Add Lifts</a>
-                        <a class="collapse-item" href={% url "edit_lift" user.pk%}>Edit Lifts</a>
+                        {% comment %} <a class="collapse-item" href={% url "edit_lift" user.pk%}>Edit Lifts</a> {% endcomment %}
                     </div>
                 </div>
             </li>
@@ -103,9 +103,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
-                        <a class="collapse-item" href={% url "search_target"%}>Target Muscle Group(WIP)</a>
-                        <a class="collapse-item" href={% url "search_body_part"%}>By Body Part(WIP)</a>
-                        <a class="collapse-item" href={% url "search_equipment"%}>Equipment(WIP)</a>
+                        {% comment %} <a class="collapse-item" href={% url "search_target"%}>Target Muscle Group(WIP)</a> {% endcomment %}
+                        {% comment %} <a class="collapse-item" href={% url "search_body_part"%}>By Body Part(WIP)</a> {% endcomment %}
+                        {% comment %} <a class="collapse-item" href={% url "search_equipment"%}>Equipment(WIP)</a> {% endcomment %}
                     </div>
                 </div>
             </li>
