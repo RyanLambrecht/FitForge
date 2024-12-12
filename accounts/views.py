@@ -86,3 +86,9 @@ def daily_checkin_view(request):
 def progress_report_view(request):
     checkins = DailyCheckIn.objects.filter(user=request.user).order_by("-date")
     return render(request, "checkins/progress_report.html", {"checkins": checkins})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Logout successful")
+    return redirect("home")

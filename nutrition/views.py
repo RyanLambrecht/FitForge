@@ -19,7 +19,7 @@ def set_caloric_intake(request):
             return redirect("meal_suggestions")  # meal suggestions
     else:
         form = CaloricIntakeForm()
-    return render(request, "nutrition/set_caloric_intake.html", {"form": form})
+    return render(request, "nutrition/daily_intake.html", {"form": form})
 
 
 @login_required

@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% block title %}Search Results{% endblock %}
+
 {% for entry in data %}
 <div>
     <h2>Workout Name: {{ entry.name }}</h2>
@@ -22,3 +27,4 @@
     {% endfor %}
 </div>
 {% endfor %}
+{% endblock %}

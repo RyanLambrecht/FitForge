@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 {% load crispy_forms_tags %}
 
 <h2>Add New Run</h2>
@@ -6,3 +8,4 @@
     {{ form|crispy }}
     <button type="submit">Save Run</button>
 </form>
+{% endblock content %}
