@@ -1,5 +1,79 @@
 {% extends "base.html" %}
 {% block content %}
-Home Page
-
+{% if user.is_authenticated %}
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 30%; padding-right: 10px;">
+            <h2>Cardio Workouts</h2>
+            <ul style="list-style-type: none; padding: 0;">
+                {% for workout in cardio_workouts %}
+                <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <a href="{% url 'edit_cardio' workout.id %}" style="text-decoration: none; color: inherit;">
+                        <strong>Date:</strong> {{ workout.date }}<br>
+                        <strong>Exercise:</strong> {{ workout.exercise }}<br>
+                        <strong>Start Time:</strong> {{ workout.start_time }}<br>
+                        <strong>End Time:</strong> {{ workout.end_time }}<br>
+                        <strong>Distance:</strong> {{ workout.distance }} km<br>
+                        <strong>Notes:</strong> {{ workout.notes }}<br>
+                    </a>
+                </li>
+                {% empty %}
+                <li>No cardio workouts yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div style="width: 1px; background-color: grey;"></div>
+        <div style="width: 30%; padding-left: 10px; padding-right: 10px;">
+            <h2>Lifting Workouts</h2>
+            <ul style="list-style-type: none; padding: 0;">
+                {% for workout in lifting_workouts %}
+                <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <a href="{% url 'edit_lift' workout.id %}" style="text-decoration: none; color: inherit;">
+                        <strong>Date:</strong> {{ workout.date }}<br>
+                        <strong>Exercise:</strong> {{ workout.exercise }}<br>
+                        <strong>Weight:</strong> {{ workout.weight }} kg<br>
+                        <strong>Reps:</strong> {{ workout.reps }}<br>
+                        <strong>Sets:</strong> {{ workout.sets }}<br>
+                        <strong>Notes:</strong> {{ workout.notes }}<br>
+                    </a>
+                </li>
+                {% empty %}
+                <li>No lifting workouts yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div style="width: 1px; background-color: grey;"></div>
+        <div style="width: 30%; padding-left: 10px;">
+            <h2>Nutrition Plans</h2>
+            <ul style="list-style-type: none; padding: 0;">
+                {% for plan in nutrition_plans %}
+                    <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <a href="{% url 'edit_daily_intake' plan.id %}" style="text-decoration: none; color: inherit;">
+                            <strong>Date:</strong> {{ plan.date }}<br>
+                            <strong>Calories:</strong> {{ plan.calories }} kcal<br>
+                            <strong>Protein:</strong> {{ plan.protein }} g<br>
+                            <strong>Carbs:</strong> {{ plan.carbs }} g<br>
+                            <strong>Fat:</strong> {{ plan.fats }} g<br>
+                            <strong>Notes:</strong> {{ plan.notes }}<br>
+                        </a>
+                    </li>
+                {% empty %}
+                <li>No nutrition plans yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% else %}
+    <div style="text-align: center; padding: 20px;">
+        <h1>Welcome to FitForge</h1>
+        <p style="font-size: 1.2em; line-height: 1.6;">
+            Your ultimate fitness companion designed to help you forge a path to a healthier, stronger you! Whether you're a beginner or a seasoned athlete, FitForge provides all the tools you need to reach your fitness goals with ease.
+        </p>
+        <p style="font-size: 1.2em; line-height: 1.6;">
+            Our platform includes powerful search tools for discovering a variety of workouts, tailored to your fitness level and preferences, and a comprehensive nutrition guide to fuel your body with the right nutrients. Additionally, with the planner feature, you can seamlessly organize and track your workouts and meals, making it easier to stay on top of your fitness journey.
+        </p>
+        <p style="font-size: 1.2em; line-height: 1.6;">
+            At FitForge, we're here to help you shape your future, one workout at a time. Let's forge your fitness path today!
+        </p>
+    </div>
+{% endif %}
 {% endblock %}

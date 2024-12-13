@@ -20,3 +20,14 @@ class DailyMacroForm(forms.ModelForm):
 
 class FoodIntakeForm(forms.Form):
     food_intake = forms.CharField(max_length=10000)
+    
+class EditDailyIntakeForm(forms.ModelForm):
+    class Meta:
+        model = Food
+        fields = [
+            "date",
+            "calories",
+            "protein",
+            "carbs",
+            "fats",
+        ]

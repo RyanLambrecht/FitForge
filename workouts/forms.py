@@ -6,7 +6,7 @@ class AddCardio(forms.ModelForm):
     class Meta:
         model = CardioWorkout
         fields = [
-            "name",
+            # "name",
             "date",
             "exercise",
             "start_time",

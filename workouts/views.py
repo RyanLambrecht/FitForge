@@ -10,7 +10,8 @@ from .forms import (
     BodyPartSearch,
     EquipmentSearch,
 )
-from django.views.generic import CreateView, FormView, TemplateView
+from nutrition.models import Food  # Adjust the import based on your actual model names
+from django.views.generic import CreateView, FormView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404
@@ -18,7 +19,23 @@ from functools import wraps
 import requests
 import os
 
+# workouts/views.py
 
+def home_view(request):
+    if request.user.is_authenticated:
+        cardio_workouts = CardioWorkout.objects.filter(name=request.user).order_by('-date')
+        lifting_workouts = LiftingWorkout.objects.filter(name=request.user).order_by('-date')
+        nutrition_plans = Food.objects.filter(name=request.user).order_by('-date')  # Use 'name' instead of 'user'
+    else:
+        cardio_workouts = []
+        lifting_workouts = []
+        nutrition_plans = []
+    
+    return render(request, 'pages/home.html', {
+        'cardio_workouts': cardio_workouts,
+        'lifting_workouts': lifting_workouts,
+        'nutrition_plans': nutrition_plans,
+    })
 def user_is_creator(model_class, object_id_field, user_field_name="user"):
     """
     Decorator to check if the logged-in user is the creator of the object.
@@ -181,3 +198,23 @@ def search_equipment_view(request):
         form = EquipmentSearch()
 
     return render(request, "searches/search.html", {"form": form})
+
+class CardioWorkoutListView(ListView):
+    model = CardioWorkout
+    template_name = "workouts/show_cardio.html"
+    context_object_name = "cardio_workouts"
+    paginate_by = 10  # Optional: for pagination
+
+    def get_queryset(self):
+        return CardioWorkout.objects.filter(name=self.request.user).order_by('-date')
+    
+class LiftingWorkoutListView(ListView):
+    model = LiftingWorkout
+    template_name = "workouts/lifting_workout_list.html"
+    context_object_name = "lifting_workouts"
+    paginate_by = 10  # Optional: for pagination
+
+    def get_queryset(self):
+        return LiftingWorkout.objects.filter(name=self.request.user).order_by('-date')
+    
+

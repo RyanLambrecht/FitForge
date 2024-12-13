@@ -26,7 +26,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("workouts/", include("workouts.urls")),
     path("nutrition/", include("nutrition.urls")),
-    path("", include("pages.urls")),  # Assuming 'pages' has the main views
+    path("", include("workouts.urls")),  # Assuming 'pages' has the main views
 ]
 
 if settings.DEBUG:

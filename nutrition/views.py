@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import CaloricIntakeForm, DailyMacroForm, FoodIntakeForm
+from .forms import CaloricIntakeForm, DailyMacroForm, FoodIntakeForm, EditDailyIntakeForm
 from .models import Food
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, FormView
 from django.urls import reverse_lazy
 import requests
+
 import os
 
 
@@ -92,7 +93,18 @@ class DailyIntakeView(LoginRequiredMixin, FormView):
         form.instance.name = self.request.user
         form.save()
         return super().form_valid(form)
-
+    
+@login_required
+def edit_daily_intake(request, pk):
+    food = get_object_or_404(Food, pk=pk)
+    if request.method == "POST":
+        form = EditDailyIntakeForm(request.POST, instance=food)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = EditDailyIntakeForm(instance=food)
+    return render(request, 'nutrition/edit_daily_intake.html', {'form': form})
 
 @login_required
 def search_nutrients(request):

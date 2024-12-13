@@ -50,14 +50,17 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            
+
+            
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Checkin
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-             {% if user.is_authenticated%}
-             <li class="nav-item">
+            <!-- Nav Item - Checkins Collapse Menu -->
+            {% if user.is_authenticated%}
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCheckins"
                     aria-expanded="true" aria-controls="collapseCheckins">
                     <i class="fas fa-fw fa-cog"></i>
@@ -72,25 +75,36 @@
                     
                 </div>
             </li>
+
             
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Workout
+            </div>
+             
+            {%endif%}
             <!-- Nav Item - Workouts Collapse Menu -->
+            {% if user.is_authenticated %}
+            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    
                     <span>Workouts</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
                         <a class="collapse-item" href={% url "add_cardio" %}>Add Cardio</a>
-                        <a class="collapse-item" href={% url "edit_cardio" pk=user.pk %}>Edit Cardio</a>
                         <a class="collapse-item" href={% url "add_lift" %}>Add Lifts</a>
-                        <a class="collapse-item" href={% url "edit_lift" pk=user.pk %}>Edit Lifts</a>
                     </div>
                 </div>
             </li>
+            {% endif %}
+
             
+            {% if user.is_authenticated %}
             <!-- Nav Item - Find Workouts Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFindWorkouts"
@@ -101,75 +115,64 @@
                 <div id="collapseFindWorkouts" class="collapse" aria-labelledby="headingFindWorkouts" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
-                        <a class="collapse-item" href={% url "search_target"%}>Target Muscle Group(WIP)</a>
-                        <a class="collapse-item" href={% url "search_body_part"%}>By Body Part(WIP)</a>
-                        <a class="collapse-item" href={% url "search_equipment"%}>Equipment(WIP)</a>
-                    </div>
-                </div>
-            </li>
+                        <a class="collapse-item" href={% url "search_target"%}>Target Muscle Group</a>
+                        <a class="collapse-item" href={% url "search_body_part"%}>By Body Part</a>
+                        <a class="collapse-item" href={% url "search_equipment"%}>Equipment</a>
 
-             <!-- Nav Item - Food Collapse Menu --> 
-             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFood"
-                    aria-expanded="true" aria-controls="collapseFood">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Food</span>
-                </a>
-                <div id="collapseFood" class="collapse" aria-labelledby="headingFood" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
-                        <a class="collapse-item" href={% url "set_caloric_intake"%}>Set Caloric intake</a>
-                        <a class="collapse-item" href={% url "recommendations"%}>Macro Recommendations</a>
-                        <a class="collapse-item" href={% url "intake_form"%}>Set Daily Macros</a>
-                        <a class="collapse-item" href={% url "nutrient_search"%}>Nutrient Search</a>
                     </div>
                 </div>
             </li>
             {% endif %}
+             
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                Food
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            
+
+            <!-- Nav Item - Charts -->
+            <!-- Nav Item - Food Collapse Menu --> 
+             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFood"
+                    aria-expanded="true" aria-controls="collapseFood">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Daily Food</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapseFood" class="collapse" aria-labelledby="headingFood" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
+                        <a class="collapse-item" href={% url "intake_form"%}>Set Daily Macro Plan</a>
+                        <a class="collapse-item" href={% url "recommendations"%}>Macro Recommendations</a>
+                        
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Charts -->
+            {% endif %}
+            {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFoodSearch"
+                    aria-expanded="true" aria-controls="collapseFoodSearch">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Food Search</span>
+                </a>
+                <div id="collapseFoodSearch" class="collapse" aria-labelledby="headingFood" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">{% comment %} empty secondary label {% endcomment %}</h6>
+                        
+                        <a class="collapse-item" href={% url "nutrient_search"%}>Nutrient Search</a>
+                    </div>
+                </div>
             </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
+            {% endif %}
+            
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -184,8 +187,11 @@
                 <p class="text-center mb-2"><strong></strong> </p>
                 
             </div> {% endcomment %}
-
+            <div class="text-center d-none d-md-inline">
+                <img src="{% static 'bootstrap/img/logo.png' %}" alt="Logo" style="width: 100px; margin: 20px 0;">
+            </div>
         </ul>
+        
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -203,18 +209,7 @@
                     </button> {% endcomment %}
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                   
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -256,8 +251,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.first_name }}</span>
-                                <img class="img-profile rounded-circle" 
-                                    src="static/bootstrap/img/undraw_profile.svg">
+                                
                                
                             </a>
                             <!-- Dropdown - User Information -->
@@ -309,13 +303,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+            
             <!-- End of Footer -->
 
         </div>
