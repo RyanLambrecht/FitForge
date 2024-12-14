@@ -12,8 +12,6 @@ from django.utils import timezone
 from django.views.generic import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
 
 
 def signup_view(request):
@@ -28,22 +26,6 @@ def signup_view(request):
         form = CustomUserCreationForm()
     return render(request, "registration/signup.html", {"form": form})
 
-@login_required
-def edit_password_view(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
-            return redirect('edit_password')
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'registration/password_change_form.html', {
-        'form': form
-    })
 
 @login_required
 def edit_account_view(request, pk):
